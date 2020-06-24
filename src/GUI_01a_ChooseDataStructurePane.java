@@ -48,6 +48,8 @@ public class GUI_01a_ChooseDataStructurePane extends BorderPane {
 
         } // end DataStructure constructor
 
+        // returns a pane that contains the toggle group that allows the user to choose which type of data structure
+        // they would like to create
         public VBox getTogglePane() {
                 VBox togglePane = new VBox();
                 rbHashSet.setToggleGroup(toggleGroup);
@@ -66,6 +68,7 @@ public class GUI_01a_ChooseDataStructurePane extends BorderPane {
 
         } // end getTogglePane method
 
+        // creates the navigation pane that sits at the bottom of the left-hand column
         public GridPane getNavPane() {
             GridPane navPane = new GridPane();
             navPane.add(btExit, 0, 0);
@@ -77,8 +80,8 @@ public class GUI_01a_ChooseDataStructurePane extends BorderPane {
                 createContactsCollection();
                 contacts.sortContactsByName();
                 mainPane.dataEntryPane = new GUI_01b_DataEntryPane(mainPane, contacts);
-                mainPane.getChildren().remove(mainPane.optionPane);
-                mainPane.add(mainPane.dataEntryPane, 0, 0, 1, 2);
+                mainPane.setLeft(null);
+                mainPane.setLeft(mainPane.dataEntryPane);
             });
 
             // UI Properties
@@ -101,8 +104,6 @@ public class GUI_01a_ChooseDataStructurePane extends BorderPane {
             } else if (rbStack.isSelected()) {
                 contacts = new Contacts(new Stack<>());
             }
-
-            contacts.seedData();
         }
 
 

@@ -72,6 +72,7 @@ public class GUI_01c_ChooseTransformationPane extends BorderPane {
         return togglePane;
     }
 
+    // creates the navigation pane that sits at the bottom of the left-hand column
     private GridPane getNavPane() {
         GridPane navPane = new GridPane();
         navPane.add(btBack, 0, 0);
@@ -82,11 +83,12 @@ public class GUI_01c_ChooseTransformationPane extends BorderPane {
         // that was previously entered in the fields, but not saved to the collection.
         btBack.setOnAction(e -> {
 
-            mainPane.getChildren().remove(mainPane.chooseTransformationPane);
-            mainPane.add(mainPane.dataEntryPane, 0, 0);
-            mainPane.getChildren().remove(mainPane.resultsPane);
+            mainPane.setLeft(null);
+            mainPane.setLeft(mainPane.dataEntryPane);
+            mainPane.setRight(null);
             mainPane.resultsPane = new GUI_03_Results();
-            mainPane.add(mainPane.resultsPane, 2, 1);
+            mainPane.setRight(mainPane.resultsPane);
+            mainPane.dataEntryPane.tfName.requestFocus();
 
         });
         // calls the performTransformation function to perform the transformation the user would like to see
@@ -117,9 +119,9 @@ public class GUI_01c_ChooseTransformationPane extends BorderPane {
 
     // helper function for displaying the results to the resultsPane
     private void displayResults(ArrayList<String> transformedContacts) {
-        mainPane.getChildren().remove(mainPane.resultsPane);
+        mainPane.setRight(null);
         mainPane.resultsPane = new GUI_03_Results(mainPane, transformedContacts);
-        mainPane.add(mainPane.resultsPane, 2, 1);
+        mainPane.setRight(mainPane.resultsPane);
     }
 
 

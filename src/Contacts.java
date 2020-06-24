@@ -80,7 +80,6 @@ public class Contacts {
 
         for (String string :
                 sortedContactCollection) {
-            System.out.println(string);
         }
 
         return sortedContactCollection;
@@ -93,7 +92,6 @@ public class Contacts {
 
         for (String string :
                 reversedContactCollection) {
-            System.out.println(string);
         }
 
         return reversedContactCollection;
@@ -145,6 +143,7 @@ public class Contacts {
         }
     }
 
+    // converts the Collection<String> passed in to a Stack or LinkedList depending on the contactsCollection actual type
     private void convertToStackLinkList (Collection<String> tempList) {
         if (contactsCollection instanceof Stack) {
             contactsCollection = new Stack<String>();

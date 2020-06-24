@@ -1,4 +1,5 @@
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 
 public class GUI_01b_DataEntryPane extends BorderPane {
@@ -15,6 +16,7 @@ public class GUI_01b_DataEntryPane extends BorderPane {
     TextField tfPhone = new TextField();
     Label lbSpacer = new Label("");
     Button btAddContact = new Button("Add Contact");
+    Button btSeedData = new Button("Use Seed Data");
     Button btBack = new Button("< Back");
     Button btContinue = new Button("Continue");
 
@@ -50,6 +52,7 @@ public class GUI_01b_DataEntryPane extends BorderPane {
         contactEntry.getChildren().add(tfPhone);
         contactEntry.getChildren().add(lbSpacer);
         contactEntry.getChildren().add(btAddContact);
+        contactEntry.getChildren().add(btSeedData);
 
         // UI PROPERTIES
 
@@ -57,32 +60,34 @@ public class GUI_01b_DataEntryPane extends BorderPane {
         contactEntry.getStyleClass().addAll("functionArea", "vbox", "padding");
         // other ui properties
         lbSpacer.setVisible(false);
-        btAddContact.prefWidthProperty().bind(contactEntry.widthProperty());
+        btAddContact.prefWidthProperty().bind(tfPhone.widthProperty());
+        btSeedData.prefWidthProperty().bind(tfPhone.widthProperty());
 
         // EVENT HANDLERS
 
         // this events saves the data from the fields to the contacts Collection, removes the contacts Collection
         // that is currently being displayed in the middle column, and it replaces it with the updated contacts
         // Collection
-        btAddContact.setOnAction(event -> {
-
-            try {
-                contacts.addContact(tfName.getText(), tfPhone.getText());
-                clearFields();
-                mainPane.getChildren().remove(mainPane.originalData);
-                mainPane.originalData = new GUI_02_OriginalDataPane(mainPane, contacts);
-                mainPane.add(mainPane.originalData, 1, 1);
-                tfName.requestFocus();
-
-            } catch (ArrayIndexOutOfBoundsException outOfBounds){
-                System.out.println("User tried entering a contact w/o a name, number, or both");
+        btAddContact.setOnAction(event -> addContact());
+        tfPhone.setOnKeyPressed(event -> {
+            if(event.getCode() == KeyCode.ENTER) {
+                addContact();
             }
+        });
 
+        // seeds sample data for the user
+        btSeedData.setOnAction(event -> {
+            contacts.seedData();
+            mainPane.setCenter(null);
+            mainPane.originalData = new GUI_02_OriginalDataPane(mainPane, contacts);
+            mainPane.setCenter(mainPane.originalData);
+            tfName.requestFocus();
         });
 
         return contactEntry;
     } // end getContactEntryPane method
 
+    // creates the navigation pane that sits at the bottom of the left-hand column
     private GridPane getNavPane() {
         GridPane navPane = new GridPane();
         navPane.add(btBack, 0, 0);
@@ -93,21 +98,21 @@ public class GUI_01b_DataEntryPane extends BorderPane {
         btBack.setOnAction(e -> {
 
             // resets the left column to new GUI_01a_ChooseDataStructure, GUI_01b_DataEntry, and GUI_03_Results instances
-            mainPane.getChildren().remove(mainPane.dataEntryPane);
+            mainPane.setLeft(null);
             mainPane.optionPane = new GUI_01a_ChooseDataStructurePane(mainPane);
-            mainPane.add(mainPane.optionPane, 0, 0, 1, 2);
-            mainPane.getChildren().remove(mainPane.originalData);
+            mainPane.setLeft(mainPane.optionPane);
+            mainPane.setCenter(null);
             mainPane.originalData = new GUI_02_OriginalDataPane();
-            mainPane.add(mainPane.originalData, 1, 1);
-            mainPane.getChildren().remove(mainPane.resultsPane);
+            mainPane.setCenter(mainPane.originalData);
+            mainPane.setRight(null);
             mainPane.resultsPane = new GUI_03_Results();
-            mainPane.add(mainPane.resultsPane, 2, 1);
+            mainPane.setRight(mainPane.resultsPane);
 
         });
         btContinue.setOnAction(e -> {
-            mainPane.getChildren().remove(mainPane.dataEntryPane);
+            mainPane.setLeft(null);
             mainPane.chooseTransformationPane = new GUI_01c_ChooseTransformationPane(mainPane, contacts);
-            mainPane.add(mainPane.chooseTransformationPane, 0, 0, 1, 2);
+            mainPane.setLeft(mainPane.chooseTransformationPane);
             mainPane.chooseTransformationPane.rbSortByName.requestFocus();
 
         });
@@ -118,6 +123,20 @@ public class GUI_01b_DataEntryPane extends BorderPane {
         return navPane;
     }
 
+    // adds contact to the contacts Collection and displays the updated contact Collection in the middle column
+    private void addContact() {
+        try {
+            contacts.addContact(tfName.getText(), tfPhone.getText());
+            clearFields();
+            mainPane.setCenter(null);
+            mainPane.originalData = new GUI_02_OriginalDataPane(mainPane, contacts);
+            mainPane.setCenter(mainPane.originalData);
+            tfName.requestFocus();
+
+        } catch (ArrayIndexOutOfBoundsException outOfBounds){
+            System.out.println("User tried entering a contact w/o a name, number, or both");
+        }
+    }
     // clears the tfName and tfPhone fields
     private void clearFields() {
         tfName.clear();

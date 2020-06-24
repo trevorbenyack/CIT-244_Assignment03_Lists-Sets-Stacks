@@ -12,9 +12,6 @@ public class Main extends Application {
         GUI_00_MainScaffoldPane mainPane = new GUI_00_MainScaffoldPane();
         Scene scene = new Scene(mainPane);
 
-
-        mainPane.maxHeightProperty().bind(scene.heightProperty());
-
         scene.getStylesheets().add("stylesheet.css");
         primaryStage.setTitle("Contacts List");
         primaryStage.setScene(scene);

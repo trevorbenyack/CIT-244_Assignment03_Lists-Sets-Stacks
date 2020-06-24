@@ -1,12 +1,13 @@
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 
 import java.util.*;
 
-public class GUI_02_OriginalDataPane extends GridPane {
+public class GUI_02_OriginalDataPane extends BorderPane {
 
     // holds the current instance of Contacts
     Contacts contacts;
@@ -14,16 +15,26 @@ public class GUI_02_OriginalDataPane extends GridPane {
     // holds the program's instance of GUI_00_MainScaffoldPane so that it can be edited
     GUI_00_MainScaffoldPane mainPane;
 
+    // UI Elements
+    Label lbOrigContData = new Label("Original Contact Data:");
+
+    // displays the contactsList
+    GridPane contactsListGridPane = new GridPane();
 
     public GUI_02_OriginalDataPane() {
+        this.setTop(lbOrigContData);
+        lbOrigContData.getStyleClass().addAll("middleColumn", "padding", "title");
     }
 
     public GUI_02_OriginalDataPane(GUI_00_MainScaffoldPane mainPane, Contacts contacts) {
 
+        // assigns passed-in instances for use w/in the class
         this.mainPane = mainPane;
         this.contacts = contacts;
 
-
+        // adds elements to the this BorderBox instance
+        this.setTop(lbOrigContData);
+        this.setCenter(contactsListGridPane);
 
         if (contacts.contactsCollection instanceof Stack) {
             populateContactsGrid((Stack<String>)contacts.contactsCollection);
@@ -36,19 +47,19 @@ public class GUI_02_OriginalDataPane extends GridPane {
         // UI PROPERTIES
 
         // css selector assignments
-        // CSS selector assignment
-        this.setId("displayOriginalDataPane");
-        this.getStyleClass().addAll("middleColumn", "grid", "padding");
+        contactsListGridPane.getStyleClass().addAll("grid", "padding");
+        this.getStyleClass().addAll("middleColumn");
+        lbOrigContData.getStyleClass().addAll("padding", "title");
 
         // other ui properties
-
         ColumnConstraints column1 = new ColumnConstraints();
         column1.setPercentWidth(50);
         ColumnConstraints column2 = new ColumnConstraints();
         column2.setPercentWidth(40);
         ColumnConstraints column3 = new ColumnConstraints();
         column3.setPercentWidth(10);
-        this.getColumnConstraints().addAll(column1, column2, column3);
+        contactsListGridPane.getColumnConstraints().addAll(column1, column2, column3);
+
 
     }
 
@@ -103,12 +114,12 @@ public class GUI_02_OriginalDataPane extends GridPane {
     // and then adds it to the instance GridPane
     private void addContactToGrid(String tempString, int row) {
         String[] contactString = tempString.split("__");
-        this.add(new Text(contactString[0]), 0, row);
-        this.add(new Text(contactString[1]), 1, row);
-        this.add(getDeleteButton(contactString[0]), 2, row);
+        contactsListGridPane.add(new Text(contactString[0]), 0, row);
+        contactsListGridPane.add(new Text(contactString[1]), 1, row);
+        contactsListGridPane.add(getDeleteButton(contactString[0]), 2, row);
 
         // sets the rows' height
-        GUI_00_MainScaffoldPane.setRowHeight(this);
+        GUI_00_MainScaffoldPane.setRowHeight(contactsListGridPane);
 
     }
 
@@ -118,9 +129,9 @@ public class GUI_02_OriginalDataPane extends GridPane {
 
         btDelete.setOnAction(e -> {
             contacts.removeContact(contactString);
-            mainPane.getChildren().remove(mainPane.originalData);
+            mainPane.setCenter(null);
             mainPane.originalData = new GUI_02_OriginalDataPane(mainPane, contacts);
-            mainPane.add(mainPane.originalData, 1, 1);
+            mainPane.setCenter(mainPane.originalData);
         });
         return btDelete;
     }
