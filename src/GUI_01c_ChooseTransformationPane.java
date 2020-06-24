@@ -1,4 +1,5 @@
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -93,6 +94,11 @@ public class GUI_01c_ChooseTransformationPane extends BorderPane {
         });
         // calls the performTransformation function to perform the transformation the user would like to see
         btContinue.setOnAction(e -> performTransformation());
+        tfContactSearch.setOnKeyPressed(e -> {
+            if(e.getCode() == KeyCode.ENTER) {
+                performTransformation();
+            }
+        });
 
         // UI Properties
         GUI_00_MainScaffoldPane.navPaneProperties(navPane, btContinue);
