@@ -1,0 +1,43 @@
+.grid {
+    -fx-vgap: 5px;
+    -fx-hgap: 10px;
+}
+.vbox {
+    -fx-spacing: 5px;
+}
+.title {
+    -fx-font-size: 20;
+}
+#mainPane {
+    -fx-min-width: 900px;
+    -fx-min-height: 600px;
+}
+.padding {
+    -fx-padding: 20px;
+}
+.leftColumn {
+    -fx-min-width: 300px;
+    -fx-background-color: darkgrey;
+}
+.middleColumn {
+    -fx-min-width: 300px;
+}
+.rightColumn {
+    -fx-min-width: 300px;
+}
+.functionArea {
+    -fx-min-height: 200px;
+}
+#chooseDataStructurePane {
+
+}
+#dataEntryPane {
+
+}
+#displayOriginalDataPane {
+
+
+}
+#chooseTransformationPane {
+
+}
