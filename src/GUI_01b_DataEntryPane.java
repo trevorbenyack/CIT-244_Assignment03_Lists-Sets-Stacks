@@ -125,15 +125,15 @@ public class GUI_01b_DataEntryPane extends BorderPane {
 
     // adds contact to the contacts Collection and displays the updated contact Collection in the middle column
     private void addContact() {
-        try {
+
+        if (!tfName.getText().isEmpty() && !tfPhone.getText().isEmpty()) {
             contacts.addContact(tfName.getText(), tfPhone.getText());
             clearFields();
             mainPane.setCenter(null);
             mainPane.originalData = new GUI_02_OriginalDataPane(mainPane, contacts);
             mainPane.setCenter(mainPane.originalData);
             tfName.requestFocus();
-
-        } catch (ArrayIndexOutOfBoundsException outOfBounds){
+        } else {
             System.out.println("User tried entering a contact w/o a name, number, or both");
         }
     }

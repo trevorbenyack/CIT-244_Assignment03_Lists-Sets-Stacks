@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+// TO DO: Add explainer section below each data structure option explaining how it stores data
+
 public class Main extends Application {
 
     @Override

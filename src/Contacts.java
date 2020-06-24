@@ -8,7 +8,8 @@ public class Contacts {
 
     // CONSTRUCTORS
     public Contacts(HashSet<String> hashSet) {
-        contactsCollection = hashSet;
+
+        contactsCollection = new HashSet<>();
     }
 
     // Set is not instantiatable, implementing LinkedHashSet and TreeSet instead
