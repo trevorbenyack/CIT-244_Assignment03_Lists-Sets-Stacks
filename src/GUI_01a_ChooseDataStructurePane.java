@@ -1,11 +1,19 @@
-import javafx.geometry.HPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.util.*;
+
+/*
+ * Trevor Benyack
+ * CIT-244
+ * Assignment 03 - Contacts Data Structure Application
+ * Due 2020-06-15
+ */
 
 public class GUI_01a_ChooseDataStructurePane extends BorderPane {
 

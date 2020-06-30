@@ -1,11 +1,21 @@
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.scene.control.Button;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
+
+/*
+ * Trevor Benyack
+ * CIT-244
+ * Assignment 03 - Contacts Data Structure Application
+ * Due 2020-06-15
+ */
 
 public class GUI_02_OriginalDataPane extends BorderPane {
 

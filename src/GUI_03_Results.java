@@ -2,12 +2,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
+
+/*
+ * Trevor Benyack
+ * CIT-244
+ * Assignment 03 - Contacts Data Structure Application
+ * Due 2020-06-15
+ */
 
 public class GUI_03_Results extends BorderPane {
 

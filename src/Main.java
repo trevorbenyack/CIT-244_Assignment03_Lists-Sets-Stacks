@@ -1,9 +1,13 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
+/*
+ * Trevor Benyack
+ * CIT-244
+ * Assignment 03 - Contacts Data Structure Application
+ * Due 2020-06-15
+ */
 
 // TO DO: Add explainer section below each data structure option explaining how it stores data
 

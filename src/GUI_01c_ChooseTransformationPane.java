@@ -3,9 +3,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-
 import java.util.ArrayList;
-import java.util.Collection;
+
+/*
+ * Trevor Benyack
+ * CIT-244
+ * Assignment 03 - Contacts Data Structure Application
+ * Due 2020-06-15
+ */
 
 public class GUI_01c_ChooseTransformationPane extends BorderPane {
 

@@ -1,6 +1,11 @@
-import com.sun.codemodel.internal.JForEach;
-
 import java.util.*;
+
+/*
+ * Trevor Benyack
+ * CIT-244
+ * Assignment 03 - Contacts Data Structure Application
+ * Due 2020-06-15
+ */
 
 public class Contacts {
 
